@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../../services/login.service';
+import { NavController } from '@ionic/angular';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -8,13 +12,28 @@ import { Component, OnInit } from '@angular/core';
 export class LoginPage implements OnInit {
 
   loginUser = {
-    email: '22districalze@gmail.com',
-    password: '123456'
+    email: 'guilleheizen@gmail.com',
+    password: 'olakase'
 };
 
-  constructor() { }
+  constructor(
+    private log: LoginService,
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {
   }
 
+  async login( fLogin: NgForm ) {
+    if ( fLogin.invalid ) { return; }
+    const valido = await this.log.login( this.loginUser.email, this.loginUser.password );
+
+    if ( valido ) {
+        // navegar al tabs
+        this.navCtrl.navigateRoot( '/main/acciones', { animated: true } );
+    } else {
+        // mostrar alerta de usuario y contraseña no correctos
+        // this.alerta.showToast('Login no válido');
+    }
+  }
 }

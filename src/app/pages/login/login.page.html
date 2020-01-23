@@ -1,44 +1,31 @@
-<ion-content>
+<ion-content class="ion-padding">
+    <ion-title mode="ios">
+        <form (ngSubmit)="login( fLogin )" #fLogin="ngForm">
+            <ion-grid class="ion-text-center ion-padding">
 
-    <form (ngSubmit)="login( fLogin )" #fLogin="ngForm">
-        <ion-grid class="ion-text-center ion-padding">
+                <h2>Iniciar Sesión</h2>
+                <ion-row>
+                    <ion-col>
+                        <ion-list>
+                            <ion-item>
+                                <ion-label>Email</ion-label>
+                                <ion-input name="email" type="email" [(ngModel)]="loginUser.email" required></ion-input>
+                            </ion-item>
 
-            <h2>Iniciar Sesión</h2>
-            <br>
-            <ion-row>
-                <ion-col>
-                    <ion-list>
-                        <ion-item>
-                            <ion-label>Email</ion-label>
-                            <ion-input name="email" type="email" [(ngModel)]="loginUser.email" required></ion-input>
-                        </ion-item>
+                            <ion-item>
+                                <ion-label>Password</ion-label>
+                                <ion-input name="password" type="password" [(ngModel)]="loginUser.password" required></ion-input>
+                            </ion-item>
+                        </ion-list>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-button type="submit" color="primary" expand="block" mode="ios">Iniciar</ion-button>
+                    </ion-col>
+                </ion-row>
 
-                        <ion-item>
-                            <ion-label>Password</ion-label>
-                            <ion-input name="password" type="password" [(ngModel)]="loginUser.password" required></ion-input>
-                        </ion-item>
-                    </ion-list>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <ion-button type="submit" color="primary" expand="block" mode="ios">Iniciar</ion-button>
-                </ion-col>
-            </ion-row>
-            <br><br>
-            <ion-row>
-                <ion-col>
-                    <img class="logo" src="../../../assets/komodo.png">
-                </ion-col>
-            </ion-row>
-            <ion-label>Powered by</ion-label>
-            <ion-row>
-                <ion-col>
-                    <img class="logo" src="../../../assets/cti.png">
-                </ion-col>
-            </ion-row>
-
-        </ion-grid>
-    </form>
-
+            </ion-grid>
+        </form>
+    </ion-title>
 </ion-content>
