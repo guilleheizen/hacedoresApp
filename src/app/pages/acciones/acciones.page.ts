@@ -1,5 +1,6 @@
 
 import { Component } from '@angular/core';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-acciones',
@@ -8,6 +9,6 @@ import { Component } from '@angular/core';
 })
 export class AccionesPage {
 
-  constructor() {}
+  constructor( public st: LoginService) {}
 
 }

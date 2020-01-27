@@ -4,17 +4,20 @@ import { IonicModule } from '@ionic/angular';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { MenuComponent } from './menu/menu.component';
 
 
 @NgModule({
   entryComponents: [],
-  declarations: [],
+  declarations: [MenuComponent],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
     IonicModule,
-  ], exports:[],
+  ], exports: [
+    MenuComponent
+  ],
 })
 
 export class ComponentsModule { }
