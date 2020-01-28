@@ -1,4 +1,24 @@
-<ion-content class="ion-padding ion-text-center">
-    <h1><b>Hola! {{ st.staff.nombre }}</b></h1>
+<ion-content class="ion-padding">
+    <ion-grid class="ion-padding">
+        <ion-row>
+            <ion-col><img src="../../../assets/logo2.png"></ion-col>
+        </ion-row>
+        <ion-row class="espacio">
+            <ion-col>
+                <ion-row *ngFor="let cosito of [{n:'Previa',i:'rewind',c:'#DA008A'},{n:'Desafio',i:'flame',c:'#ffce00'},{n:'Futbol',i:'football',c:'#04c8c5'}, {n:'Posta',i:'fitness',c:'#7e57ff'}, {n:'Sanción',i:'sad',c:'#f04141'}, {n:'Otro',i:'clipboard',c:'#333c4e'}]"
+                    class="accion" [ngStyle]="{ 'background': cosito.c } ">
+                    <ion-icon [name]="cosito.i"></ion-icon>
+                    <h1>{{ cosito.n }}</h1>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row class="espacio">
+            <ion-col *ngFor="let equipo of datos.equipos">
+                <ion-row [ngStyle]="{ 'background': equipo.color }" class="equipo">
+                    <img [src]="equipo.logo">
+                </ion-row>
+            </ion-col>
+        </ion-row>
 
+    </ion-grid>
 </ion-content>

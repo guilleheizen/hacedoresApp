@@ -24,7 +24,6 @@ export class LoginService {
 
   login( email: string, password: string ) {
     const data = { email, password };
-
     return new Promise( resolve => {
       this.http.post(`${ URL }/staff/login`, data ).subscribe( async (resp: any) => {
         if ( resp.ok ) {
@@ -51,17 +50,14 @@ export class LoginService {
   }
 
   async validarCredenciales(): Promise<boolean> {
-
     await this.cargarCredenciales();
-
     if ( !this.token ) {
       this.navCtrl.navigateRoot('/login');
       return Promise.resolve(false);
     } else {
       return Promise.resolve(true);
     }
-}
-
+  }
 
   async cargarCredenciales() {
     this.token = await this.storage.get('token') || null;
