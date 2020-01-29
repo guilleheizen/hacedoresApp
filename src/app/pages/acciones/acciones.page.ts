@@ -2,6 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { DatosService } from '../../services/datos.service';
+import { ModalController } from '@ionic/angular';
+import { BuscarComponent } from '../../components/buscar/buscar.component';
+import { Categoria } from '../interfaces/interfaces';
+
 
 @Component({
   selector: 'app-acciones',
@@ -12,10 +16,27 @@ export class AccionesPage implements OnInit {
 
   constructor(
     public st: LoginService,
-    public datos: DatosService
+    public datos: DatosService,
+    public modalController: ModalController
   ) {}
 
   ngOnInit() {
     this.datos.getEquipos();
+    this.datos.getAcampantes();
+    this.datos.getCategorias();
+    this.datos.getSanciones();
+    this.datos.getActividades();
+    this.datos.getAcciones();
+  }
+
+  async presentModal(categoria: Categoria) {
+
+    const modal = await this.modalController.create({
+      component: BuscarComponent,
+      componentProps: {
+        categoria
+      }
+    });
+    return await modal.present();
   }
 }

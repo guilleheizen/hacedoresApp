@@ -4,14 +4,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AccionesPage } from './acciones.page';
+import { BuscarComponent } from '../../components/buscar/buscar.component';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: AccionesPage }])
+    RouterModule.forChild([{ path: '', component: AccionesPage }]),
+    ComponentsModule
   ],
-  declarations: [AccionesPage]
+  declarations: [AccionesPage],
+  entryComponents: [BuscarComponent]
 })
 export class AccionesPageModule {}

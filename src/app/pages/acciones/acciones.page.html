@@ -5,10 +5,9 @@
         </ion-row>
         <ion-row class="espacio">
             <ion-col>
-                <ion-row *ngFor="let cosito of [{n:'Previa',i:'rewind',c:'#DA008A'},{n:'Desafio',i:'flame',c:'#ffce00'},{n:'Futbol',i:'football',c:'#04c8c5'}, {n:'Posta',i:'fitness',c:'#7e57ff'}, {n:'Sanción',i:'sad',c:'#f04141'}, {n:'Otro',i:'clipboard',c:'#333c4e'}]"
-                    class="accion" [ngStyle]="{ 'background': cosito.c } ">
-                    <ion-icon [name]="cosito.i"></ion-icon>
-                    <h1>{{ cosito.n }}</h1>
+                <ion-row *ngFor="let categoria of datos.categorias" class="accion" [ngStyle]="{ 'background': categoria.color } " (click)="presentModal(categoria)">
+                    <ion-icon [name]="categoria.icono"></ion-icon>
+                    <h1>{{ categoria.nombre }}</h1>
                 </ion-row>
             </ion-col>
         </ion-row>
