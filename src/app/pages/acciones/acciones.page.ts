@@ -21,12 +21,7 @@ export class AccionesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.datos.getEquipos();
-    this.datos.getAcampantes();
-    this.datos.getCategorias();
-    this.datos.getSanciones();
-    this.datos.getActividades();
-    this.datos.getAcciones();
+    this.datos.cargarVariables();
   }
 
   async presentModal(categoria: Categoria) {

@@ -52,20 +52,6 @@ export interface Acampante {
   data: string;
 }
 
-export interface RespuestaSancion {
-  ok: boolean;
-  sanciones: Sancion[];
-}
-
-export interface Sancion {
-  _id?: string;
-  nombre: string;
-  observaciones: string;
-  puntos: number;
-  creador: string;
-  data: string;
-}
-
 export interface RespuestaAccion {
   ok: boolean;
   acciones: Accion[];

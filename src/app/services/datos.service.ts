@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-import { Equipo, Categoria, Sancion, Accion, Actividad, Acampante, RespuestaEquipo, RespuestaCategoria, RespuestaSancion, RespuestaAccion, RespuestaActividad, RespuestaAcampante } from '../pages/interfaces/interfaces';
+import { Equipo, Categoria, Accion, Actividad, Acampante, RespuestaEquipo, RespuestaCategoria, RespuestaAccion, RespuestaActividad, RespuestaAcampante } from '../pages/interfaces/interfaces';
 import { NavController } from '@ionic/angular';
 import { LoginService } from './login.service';
 
@@ -18,7 +18,6 @@ export class DatosService {
     public equipos: Equipo[];
     public acampantes: Acampante[];
     public categorias: Categoria[];
-    public sanciones: Sancion[];
     public actividades: Actividad[];
     public acciones: Accion[];
 
@@ -86,22 +85,6 @@ export class DatosService {
 
     }
 
-    getSanciones() {
-
-        const headers = this.headers;
-
-        this.http.get(`${ URL }/sanciones/`, { headers }).subscribe( (resp: RespuestaSancion) => {
-            if ( resp.ok ) {
-                this.sanciones = resp.sanciones;
-                this.storage.set('sanciones', this.sanciones);
-            } else {
-                this.storage.clear();
-                this.navCtrl.navigateForward('/login');
-            }
-        });
-
-    }
-
     getActividades() {
 
         const headers = this.headers;
@@ -132,5 +115,13 @@ export class DatosService {
             }
         });
 
+    }
+
+    async cargarVariables() {
+        this.equipos = await this.storage.get('equipos');
+        this.acampantes = await this.storage.get('acampantes');
+        this.categorias = await this.storage.get('categorias');
+        this.actividades = await this.storage.get('actividades');
+        this.acciones = await this.storage.get('acciones');
     }
 }

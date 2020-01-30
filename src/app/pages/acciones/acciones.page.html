@@ -3,6 +3,13 @@
         <ion-row>
             <ion-col><img src="../../../assets/logo2.png"></ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col *ngFor="let equipo of datos.equipos">
+                <ion-row [ngStyle]="{ 'background': equipo.color }" class="equipo">
+                    <img [src]="equipo.logo">
+                </ion-row>
+            </ion-col>
+        </ion-row>
         <ion-row class="espacio">
             <ion-col>
                 <ion-row *ngFor="let categoria of datos.categorias" class="accion" [ngStyle]="{ 'background': categoria.color } " (click)="presentModal(categoria)">
@@ -11,13 +18,5 @@
                 </ion-row>
             </ion-col>
         </ion-row>
-        <ion-row class="espacio">
-            <ion-col *ngFor="let equipo of datos.equipos">
-                <ion-row [ngStyle]="{ 'background': equipo.color }" class="equipo">
-                    <img [src]="equipo.logo">
-                </ion-row>
-            </ion-col>
-        </ion-row>
-
     </ion-grid>
 </ion-content>

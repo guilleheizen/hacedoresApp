@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Categoria } from '../../pages/interfaces/interfaces';
+import { Categoria, Actividad } from '../../pages/interfaces/interfaces';
 import { ModalController } from '@ionic/angular';
+import { DatosService } from '../../services/datos.service';
 
 @Component({
   selector: 'app-buscar',
@@ -11,9 +12,20 @@ export class BuscarComponent implements OnInit {
 
   @Input() categoria: Categoria;
 
-  constructor(private modalCtrl: ModalController) { }
+  actividades: Actividad[];
 
-  ngOnInit() { }
+  constructor(
+    private modalCtrl: ModalController,
+    private datos: DatosService
+  ) { }
+
+  ngOnInit() {
+    this.actividades = this.datos.actividades.filter( (bsq) => bsq.categoria === this.categoria._id);
+  }
+
+  buscar( palabra: string) {
+
+  }
 
   async close() {
     await this.modalCtrl.dismiss();
