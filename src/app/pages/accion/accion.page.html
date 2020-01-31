@@ -1,0 +1,16 @@
+<ion-content class="ion-text-center">
+    <ion-grid *ngIf="categoria" [ngStyle]="{'background-color':categoria.color }">
+        <ion-row>
+            <h2>{{ nombre }}</h2>
+            <p> {{ actividad.observaciones }} </p>
+            <h1> {{ categoria.signo }} {{ actividad.puntos }} </h1>
+        </ion-row>
+        <ion-row>
+            <ion-col size="6" *ngFor="let equipo of datos.equipos">
+                <ion-row [ngStyle]="{ 'background': equipo.color }" class="equipo">
+                    <img [src]="equipo.logo">
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

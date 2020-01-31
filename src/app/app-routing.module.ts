@@ -16,7 +16,7 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'main'
-  }
+  },
 ];
 @NgModule({
   imports: [

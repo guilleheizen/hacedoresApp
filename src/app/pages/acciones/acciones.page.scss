@@ -9,6 +9,7 @@
     padding: 10px 15px;
     font-size: 20px;
     color: #ffffff;
+    // border: solid 3px #ffffff;
 }
 
 .accion h1 {
@@ -28,10 +29,12 @@
 .equipo {
     border-radius: 50px;
     overflow: hidden;
+    // border: solid 3px #ffffff;
 }
 
 ion-content {
     --background: none;
     background-image: url('../../../assets/bg.png');
+    // background-color: #002143;
     --padding-bottom: 50px;
 }

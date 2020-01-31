@@ -34,6 +34,7 @@ export interface Categoria {
   valor: string;
   color: string;
   data: string;
+  signo?: string;
 }
 
 export interface RespuestaAcampante {
@@ -85,5 +86,7 @@ export interface Actividad {
   puntos: number;
   estado: string;
   creador: string;
-  data: string;
+  posEquipo?: number[];
+  orden?: number;
+  data: Date;
 }

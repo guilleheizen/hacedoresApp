@@ -1,15 +1,35 @@
 ion-grid {
     width: 100vw;
     min-height: 100vh;
-    padding:30px;
+    padding: 30px;
 }
 
-.contenedor{
-    background:#ffffff;
+.contenedor {
+    background: #ffffff;
     border-radius: 10px;
     padding-bottom: 10px;
 }
 
-.lista{
-    padding:0px 20px 20px 20px;
+.lista {
+    padding: 0px 20px 20px 20px;
+    min-height: 45vh;
+}
+
+.enviar {
+    margin-top: 20px
+}
+
+.equipo {
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.equipo img {
+    opacity: 0.4;
+    filter: grayscale(70%);
+}
+
+.equipo img.active {
+    opacity: 1;
+    filter: grayscale(0%);
 }

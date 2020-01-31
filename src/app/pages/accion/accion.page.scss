@@ -1,0 +1,28 @@
+ion-grid {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 30px;
+}
+
+* {
+    color: #ffffff;
+}
+
+h1,
+h2,
+p {
+    font-weight: bold;
+    width: 100%;
+}
+
+h2 {}
+
+h1 {
+    font-size: 130px;
+    margin: 0px;
+}
+
+.equipo {
+    border-radius: 150px;
+    overflow: hidden;
+}

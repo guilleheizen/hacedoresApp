@@ -38,6 +38,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'accion/:nombre',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../accion/accion.module').then(m => m.AccionPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: 'acciones',
         pathMatch: 'full'
