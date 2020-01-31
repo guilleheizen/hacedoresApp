@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -8,8 +9,16 @@ import { LoginService } from '../../services/login.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor( public st: LoginService) { }
+  constructor(
+    public st: LoginService,
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {}
+
+  cerrarSesion() {
+    this.st.logOut();
+    this.navCtrl.navigateRoot('/login');
+  }
 
 }

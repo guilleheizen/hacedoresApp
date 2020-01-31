@@ -14,26 +14,29 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-grid [ngStyle]="{'background-color':categoria.color }" style="padding:30px">
-        <ion-row style="background:#ffffff; border-radius: 10px; padding-bottom: 10px;">
+    <ion-grid [ngStyle]="{'background-color':categoria.color }">
+        <ion-row class="contenedor">
             <ion-col>
-                <form onsubmit="processForm(event)">
+                <form>
                     <ion-list lines="full" class="ion-padding">
 
                         <ion-item>
-                            <ion-input type="text" placeholder="Buscar:"></ion-input>
+                            <ion-input type="text" (ionChange)="buscar($event)" placeholder="Buscar:" #buscador></ion-input>
                         </ion-item>
 
                     </ion-list>
-
                 </form>
-                <ion-list style="padding:20px">
+                <ion-list class="lista">
                     <ion-item *ngFor=" let acti of actividades" [routerLink]="['/main/acciones']" routerLinkActive="router-link-active">
                         <ion-icon slot="start" [name]="categoria.icono" [ngStyle]="{'color':categoria.color }"></ion-icon>
                         <ion-label>{{ acti.nombre }}</ion-label>
                     </ion-item>
-                    <br>
-                    <ion-button color="primary" mode="ios" expand="block">Crear</ion-button>
+                    
+                    
+                </ion-list>
+                <ion-list class="lista ion-text-center " *ngIf="actividades.length < 1">
+                    <h3> Crear {{ categoria.nombre}}</h3>
+                    <ion-button  color="primary" mode="ios" expand="block">Crear</ion-button>
                 </ion-list>
 
             </ion-col>

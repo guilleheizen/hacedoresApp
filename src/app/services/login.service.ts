@@ -64,4 +64,7 @@ export class LoginService {
     this.staff = await this.storage.get('staff') || {};
   }
 
+  logOut(){
+    this.storage.clear();
+  }
 }
