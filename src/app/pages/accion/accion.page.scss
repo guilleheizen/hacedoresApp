@@ -1,10 +1,11 @@
 ion-grid {
     width: 100vw;
-    min-height: 100vh;
-    padding: 30px;
+    min-height: 95vh;
+    margin: 0px;
+    padding: 20px 30px;
 }
 
-* {
+ion-row {
     color: #ffffff;
 }
 
@@ -13,16 +14,47 @@ h2,
 p {
     font-weight: bold;
     width: 100%;
+    margin: 0px;
 }
 
-h2 {}
+h2 {
+    margin: 10px;
+}
 
 h1 {
-    font-size: 130px;
+    margin: 20px 0px 0px 0px !important;
+    font-size: 100px;
     margin: 0px;
+    border: solid 3px #ffffff;
+    border-radius: 20px;
+}
+
+.obs {
+    margin-top: 10px;
+}
+
+.obs ion-item {
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+ion-content {
+    --padding-bottom: 50px;
 }
 
 .equipo {
     border-radius: 150px;
     overflow: hidden;
+    border: solid 3px #ffffff;
+    background-color: #cecece;
+}
+
+.equipo img {
+    opacity: 0.4;
+    filter: grayscale(70%);
+}
+
+.equipo img.active {
+    opacity: 1;
+    filter: grayscale(0%);
 }

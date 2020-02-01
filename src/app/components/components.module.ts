@@ -6,13 +6,15 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './menu/menu.component';
 import { BuscarComponent } from './buscar/buscar.component';
+import { EquipoComponent } from './equipo/equipo.component';
 
 
 @NgModule({
   entryComponents: [],
   declarations: [
     MenuComponent,
-    BuscarComponent
+    BuscarComponent,
+    EquipoComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { BuscarComponent } from './buscar/buscar.component';
     IonicModule,
   ], exports: [
     MenuComponent,
-    BuscarComponent
+    BuscarComponent,
+    EquipoComponent
   ],
 })
 

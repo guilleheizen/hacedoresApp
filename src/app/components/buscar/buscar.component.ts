@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Categoria, Actividad, Staff } from '../../pages/interfaces/interfaces';
+import { Categoria, Actividad } from '../../pages/interfaces/interfaces';
 import { ModalController, NavController } from '@ionic/angular';
 import { DatosService } from '../../services/datos.service';
 import { NgForm } from '@angular/forms';
@@ -14,7 +14,9 @@ import { StorageService } from '../../services/storage.service';
 export class BuscarComponent implements OnInit {
 
   @Input() categoria: Categoria;
+
   @ViewChild('buscador', {static: true})  buscador;
+
   actividades: Actividad[];
 
   newActividad: Actividad = {
@@ -45,7 +47,7 @@ export class BuscarComponent implements OnInit {
     this.datos.cargarVariables();
     setTimeout(() => {
       this.buscador.setFocus();
-    }, 150);
+    }, 250);
 
  }
 

@@ -1,0 +1,15 @@
+.equipo {
+    border-radius: 150px;
+    overflow: hidden;
+    border: solid 3px #ffffff;
+}
+
+.equipo img {
+    opacity: 0.4;
+    filter: grayscale(70%);
+}
+
+.equipo img.active {
+    opacity: 1;
+    filter: grayscale(0%);
+}

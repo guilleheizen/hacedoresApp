@@ -27,6 +27,7 @@ export class DatosService {
         private navCtrl: NavController,
         public cred: LoginService
     ) {
+        this.cargarVariables();
         this.getHeaders();
     }
 
