@@ -5,6 +5,7 @@ import { DatosService } from '../../services/datos.service';
 import { NgForm } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { StorageService } from '../../services/storage.service';
+import { ValidadorService } from 'src/app/services/validador.service';
 
 @Component({
   selector: 'app-buscar',
@@ -36,7 +37,8 @@ export class BuscarComponent implements OnInit {
     public datos: DatosService,
     public stor: StorageService,
     private us: LoginService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private val: ValidadorService
   ) { }
 
   ngOnInit() {
@@ -54,7 +56,7 @@ export class BuscarComponent implements OnInit {
   buscar( event ) {
     const palabra = event.detail.value || '';
     this.newActividad.nombre = palabra;
-    this.actividades = this.datos.actividades.filter( (bsq) => ( bsq.categoria === this.categoria._id && bsq.nombre.toLowerCase().indexOf( palabra ) > -1 ));
+    this.actividades = this.datos.actividades.filter( (bsq) => ( bsq.categoria === this.categoria._id && bsq.nombre.toLowerCase().indexOf( palabra.toLowerCase() ) > -1 ));
   }
 
   async close() {
@@ -64,13 +66,29 @@ export class BuscarComponent implements OnInit {
   async enviar( fActividad: NgForm ) {
     this.newActividad.categoria = this.categoria._id;
     this.newActividad.creador = this.us.staff._id;
-    this.stor.crearActividad( this.newActividad );
-    this.datos.cargarVariables();
-    this.irAccion( this.newActividad.nombre );
+    this.newActividad.nombre = this.newActividad.nombre.replace("/", "-");
+    
+    if ( this.newActividad.participantes.length === 0 ) {
+      this.datos.equipos.forEach(eq => {
+        this.newActividad.participantes.push(eq._id);
+      });
+    }
+    
+    if ( this.val.validarActividad(this.newActividad) ) {
+      this.stor.crearActividad( this.newActividad );
+      this.datos.cargarVariables();
+      this.irAccion( this.newActividad.nombre );
+    }
+    
   }
 
   irAccion( nombre: string ) {
-    this.navCtrl.navigateForward('main/accion/' + nombre, {animated: true} );
+    
+    // VALIDAR 
+    // this.val.presentToast('Olakase tavychi');
+
+
+    this.navCtrl.navigateForward('main/accion/' +  encodeURI(nombre), {animated: true} );
     this.close();
   }
 

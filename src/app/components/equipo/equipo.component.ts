@@ -10,6 +10,7 @@ import { Equipo } from '../../pages/interfaces/interfaces';
 export class EquipoComponent implements OnInit {
 
   @Input() id: string;
+  @Input() estilo: string;
   equipo: Equipo;
 
   constructor(
@@ -17,10 +18,7 @@ export class EquipoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.datos.equipos);
-    console.log(this.id);
-    const posicion = this.datos.equipos.findIndex( eq => { eq._id === this.id;  } );
-    console.log(posicion);
+    const posicion = this.datos.equipos.findIndex( eq => eq._id === this.id );
     this.equipo = this.datos.equipos[posicion];
   }
 

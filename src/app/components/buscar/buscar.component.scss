@@ -15,6 +15,11 @@ ion-grid {
     min-height: 45vh;
 }
 
+.lista2 {
+    padding: 0px 15px 20px 0px;
+    min-height: 45vh;
+}
+
 .enviar {
     margin-top: 20px
 }
@@ -32,4 +37,25 @@ ion-grid {
 .equipo img.active {
     opacity: 1;
     filter: grayscale(0%);
+}
+
+ion-avatar{
+    width: 20px;
+    height: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    -webkit-margin-end: 5px;
+    margin-inline-end: 5px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+ion-item ion-icon{
+    -webkit-margin-end: 5px;
+    margin-inline-end: 5px;
+}
+
+
+ion-item ion-label{
+    margin-left: 5px;
 }
