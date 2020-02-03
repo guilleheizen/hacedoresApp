@@ -26,7 +26,7 @@
                     </ion-list>
                 </form>
                 <ion-list class="lista2" *ngIf="actividades.length > 0">
-                    <ion-item *ngFor=" let acti of actividades" (click)="irAccion( acti.nombre )">
+                    <ion-item *ngFor=" let acti of actividades" (click)="irAccion( acti )">
                         <ion-avatar *ngFor=" let par of acti.participantes" slot="start">
                             <app-equipo class="cor" [id]="par" [estilo]="'img'"></app-equipo>
                         </ion-avatar>

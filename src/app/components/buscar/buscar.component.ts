@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Categoria, Actividad } from '../../pages/interfaces/interfaces';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, AlertController } from '@ionic/angular';
 import { DatosService } from '../../services/datos.service';
 import { NgForm } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
@@ -34,6 +34,7 @@ export class BuscarComponent implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
     public datos: DatosService,
     public stor: StorageService,
     private us: LoginService,
@@ -64,6 +65,7 @@ export class BuscarComponent implements OnInit {
   }
 
   async enviar( fActividad: NgForm ) {
+
     this.newActividad.categoria = this.categoria._id;
     this.newActividad.creador = this.us.staff._id;
     this.newActividad.nombre = this.newActividad.nombre.replace("/", "-");
@@ -77,19 +79,18 @@ export class BuscarComponent implements OnInit {
     if ( this.val.validarActividad(this.newActividad) ) {
       this.stor.crearActividad( this.newActividad );
       this.datos.cargarVariables();
-      this.irAccion( this.newActividad.nombre );
+      this.irAccion( this.newActividad );
     }
     
   }
 
-  irAccion( nombre: string ) {
+  irAccion( acti: Actividad ) {
     
-    // VALIDAR 
+
+    this.presentAlertConfirm('cosito');
     // this.val.presentToast('Olakase tavychi');
-
-
-    this.navCtrl.navigateForward('main/accion/' +  encodeURI(nombre), {animated: true} );
-    this.close();
+    // this.navCtrl.navigateForward('main/accion/' +  encodeURI(nombre), {animated: true} );
+    // this.close();
   }
 
   selectEquipo( posicion: number, equipo: string) {
@@ -101,6 +102,31 @@ export class BuscarComponent implements OnInit {
       this.newActividad.posEquipo.push(posicion);
       this.newActividad.participantes.push(equipo);
     }
+  }
+
+
+  async presentAlertConfirm(message: string) {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmar participantes',
+      message,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }
