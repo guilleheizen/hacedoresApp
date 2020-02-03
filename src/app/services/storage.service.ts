@@ -36,4 +36,21 @@ export class StorageService {
       }
     }
 
+    async actualizarActividad( actividad: Actividad ) {
+      this.actividades = await this.storage.get('actividades');
+      const existe = this.actividades.find( act => act._id === actividad._id );
+
+      if ( !existe ) {
+        // AGREGAR
+        this.actividades.unshift(actividad);
+        this.storage.set('actividades', this.actividades);
+        // Enviar a esa actividad
+      } else {
+        this.actividades = this.actividades.filter(act => act._id !== actividad._id );
+        this.actividades.unshift(actividad);
+        this.storage.set('actividades', this.actividades);
+        // Toast - enviar a esa actividad
+      }
+    }
+
 }

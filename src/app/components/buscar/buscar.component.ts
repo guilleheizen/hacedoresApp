@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { StorageService } from '../../services/storage.service';
 import { ValidadorService } from 'src/app/services/validador.service';
+import { SelectEquiposComponent } from '../select-equipos/select-equipos.component';
 
 @Component({
   selector: 'app-buscar',
@@ -68,29 +69,26 @@ export class BuscarComponent implements OnInit {
 
     this.newActividad.categoria = this.categoria._id;
     this.newActividad.creador = this.us.staff._id;
-    this.newActividad.nombre = this.newActividad.nombre.replace("/", "-");
-    
+    this.newActividad.nombre = this.newActividad.nombre.replace('/', '-');
+
     if ( this.newActividad.participantes.length === 0 ) {
       this.datos.equipos.forEach(eq => {
         this.newActividad.participantes.push(eq._id);
       });
     }
-    
+
     if ( this.val.validarActividad(this.newActividad) ) {
       this.stor.crearActividad( this.newActividad );
       this.datos.cargarVariables();
       this.irAccion( this.newActividad );
     }
-    
+
   }
 
   irAccion( acti: Actividad ) {
-    
 
-    this.presentAlertConfirm('cosito');
-    // this.val.presentToast('Olakase tavychi');
-    // this.navCtrl.navigateForward('main/accion/' +  encodeURI(nombre), {animated: true} );
-    // this.close();
+    this.navCtrl.navigateForward('main/accion/' +  encodeURI(acti.nombre), {animated: true} );
+    this.close();
   }
 
   selectEquipo( posicion: number, equipo: string) {
@@ -105,28 +103,15 @@ export class BuscarComponent implements OnInit {
   }
 
 
-  async presentAlertConfirm(message: string) {
-    const alert = await this.alertCtrl.create({
-      header: 'Confirmar participantes',
-      message,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Confirmar',
-          handler: () => {
-            console.log('Confirm Okay');
-          }
-        }
-      ]
+  async selectEquipos(acti: Actividad) {
+    const modal = await this.modalCtrl.create({
+      component: SelectEquiposComponent,
+      cssClass: 'dialog-modal',
+      componentProps: {
+        actividad: acti
+      }
     });
-
-    await alert.present();
+    return await modal.present();
   }
 
 }

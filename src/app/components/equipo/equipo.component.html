@@ -1,4 +1,8 @@
-<ion-row  *ngIf="estilo === 'contenedor' && equipo" [ngStyle]="{ 'background': equipo.color }" class="equipo">
+<ion-row *ngIf="estilo === 'contenedor' && equipo" [ngStyle]="{ 'background': equipo.color }" class="equipo">
+    <img [src]="equipo.logo">
+</ion-row>
+
+<ion-row *ngIf="estilo === 'contenedor-activo' && equipo" [ngStyle]="{ 'background': equipo.color }" class="equipo active">
     <img class="active" [src]="equipo.logo">
 </ion-row>
 

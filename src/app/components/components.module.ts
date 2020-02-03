@@ -7,14 +7,16 @@ import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './menu/menu.component';
 import { BuscarComponent } from './buscar/buscar.component';
 import { EquipoComponent } from './equipo/equipo.component';
+import { SelectEquiposComponent } from './select-equipos/select-equipos.component';
 
 
 @NgModule({
-  entryComponents: [],
+  entryComponents: [SelectEquiposComponent],
   declarations: [
     MenuComponent,
     BuscarComponent,
-    EquipoComponent
+    EquipoComponent,
+    SelectEquiposComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { EquipoComponent } from './equipo/equipo.component';
   ], exports: [
     MenuComponent,
     BuscarComponent,
-    EquipoComponent
+    EquipoComponent,
+    SelectEquiposComponent
   ],
 })
 

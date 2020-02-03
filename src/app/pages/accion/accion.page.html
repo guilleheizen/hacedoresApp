@@ -21,15 +21,15 @@
         </ion-row>
         <ion-row *ngIf="actividad.participantes.length === 4">
             <ion-col size="6" *ngFor=" let id of actividad.participantes">
-                <app-equipo [id]="id" [estilo]="'contenedor'"></app-equipo>
+                <app-equipo [id]="id" [estilo]="'contenedor-activo'"></app-equipo>
             </ion-col>
         </ion-row>
         <ion-row *ngIf="actividad.participantes.length !== 4">
             <ion-col *ngFor=" let id of actividad.participantes">
-                <app-equipo [id]="id" [estilo]="'contenedor'"></app-equipo>
+                <app-equipo [id]="id" [estilo]="'contenedor-activo'"></app-equipo>
             </ion-col>
         </ion-row>
-        
+
     </ion-grid>
 
 </ion-content>
