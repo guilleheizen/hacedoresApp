@@ -3,3 +3,26 @@ ion-content {
     background-image: url('../../../assets/bg.png');
     --padding-bottom: 50px;
 }
+
+ion-list {
+    padding: 20px 20px 40px 20px;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+ion-avatar {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    -webkit-margin-end: 5px;
+    margin-inline-end: 5px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+ion-item ion-label {
+    margin-left: 5px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}

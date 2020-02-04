@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../services/datos.service';
-import { Actividad, Categoria } from '../interfaces/interfaces';
+import { Actividad, Categoria, Accion } from '../interfaces/interfaces';
 import { Platform, NavController } from '@ionic/angular';
+import { ValidadorService } from '../../services/validador.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-accion',
@@ -13,6 +15,11 @@ export class AccionPage implements OnInit {
 
   public nombre = '';
 
+  newAccion = {
+    titulo: '',
+    observacion: ''
+  };
+
   @ViewChild('nom', {  static: false })  nom;
 
   actividad: Actividad;
@@ -22,18 +29,18 @@ export class AccionPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     public datos: DatosService,
     public platform: Platform,
-    public navCtrl: NavController
-  ) {
-    this.nombre = this.activatedRoute.snapshot.paramMap.get('nombre');
-    this.cargarDatos();
-  }
+    public navCtrl: NavController,
+    private al: ValidadorService,
+    private stor: StorageService
+  ) {}
 
 
   ngOnInit() {
-
+    this.nombre = this.activatedRoute.snapshot.paramMap.get('nombre');
   }
 
   ionViewWillEnter() {
+    this.cargarDatos();
     setTimeout(() => {
       this.nom.setFocus();
     }, 250);
@@ -49,6 +56,43 @@ export class AccionPage implements OnInit {
     } else {
       this.categoria.signo = '-';
     }
+
+  }
+
+  selectEquipo(id: string) {
+    // Validar
+    if (this.newAccion.titulo.length < 3) {
+      this.nom.setFocus();
+      this.al.presentToast('Nombre Requerido');
+      return false;
+    }
+
+    if (this.newAccion.observacion.length < 3) {
+      this.nom.setFocus();
+      this.al.presentToast('Observaciones Requeridas');
+      return false;
+    }
+
+    const accion: Accion = {
+      _id: '',
+      nombre: this.newAccion.titulo,
+      observaciones: this.newAccion.observacion,
+      equipo: id,
+      numero: '',
+      puntos: this.actividad.puntos,
+      categoria: this.categoria._id,
+      actividad: this.actividad.nombre,
+      creador: this.datos.staff._id,
+      estado: 'CREADA',
+      valor: this.categoria.valor,
+      data: new Date().toString()
+    };
+
+    this.stor.crearAccion(accion);
+    this.al.presentToast('Registrado correctamente');
+    this.navCtrl.navigateBack('main/acciones', {animated: true});
+    this.newAccion.titulo = '';
+    this.newAccion.observacion = '';
   }
 
 

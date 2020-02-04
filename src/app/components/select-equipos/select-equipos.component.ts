@@ -29,7 +29,7 @@ export class SelectEquiposComponent implements OnInit {
 
     const hay = this.actividad.participantes.indexOf( id );
 
-    if (hay !== -1 && this.actividad.participantes.length === 2){
+    if (hay !== -1 && this.actividad.participantes.length === 2) {
       this.val.presentToast('Debe haber por lo menos 2 equipos');
     } else {
       if ( hay === -1 ) {
@@ -43,9 +43,8 @@ export class SelectEquiposComponent implements OnInit {
   confirmar() {
     this.stor.actualizarActividad(this.actividad);
     this.close();
-    this.navCtrl.navigateForward('main/accion/' +  encodeURI(this.actividad.nombre), {animated: true} );
   }
   async close() {
-    await this.modalCtrl.dismiss();
+    await this.modalCtrl.dismiss(this.actividad);
   }
 }

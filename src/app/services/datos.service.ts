@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-import { Equipo, Categoria, Accion, Actividad, Acampante, RespuestaEquipo, RespuestaCategoria, RespuestaAccion, RespuestaActividad, RespuestaAcampante } from '../pages/interfaces/interfaces';
+import { Equipo, Categoria, Accion, Actividad, Acampante, RespuestaEquipo, RespuestaCategoria, RespuestaAccion, RespuestaActividad, RespuestaAcampante, Staff } from '../pages/interfaces/interfaces';
 import { NavController } from '@ionic/angular';
 import { LoginService } from './login.service';
 
@@ -20,6 +20,7 @@ export class DatosService {
     public categorias: Categoria[];
     public actividades: Actividad[];
     public acciones: Accion[];
+    public staff: Staff;
 
     constructor(
         private http: HttpClient,
@@ -124,5 +125,6 @@ export class DatosService {
         this.categorias = await this.storage.get('categorias');
         this.actividades = await this.storage.get('actividades');
         this.acciones = await this.storage.get('acciones');
+        this.staff = await this.storage.get('staff');
     }
 }

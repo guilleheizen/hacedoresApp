@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Equipo, Categoria, Accion, Actividad, Acampante, RespuestaEquipo, RespuestaCategoria, RespuestaAccion, RespuestaActividad, RespuestaAcampante } from '../pages/interfaces/interfaces';
 import { LoginService } from './login.service';
+import { DatosService } from './datos.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,14 @@ export class StorageService {
 
     constructor(
         private storage: Storage,
-        public cred: LoginService
+        public cred: LoginService,
+        private datos: DatosService,
     ) {}
 
     // ABM DATOS
 
     async crearActividad( actividad: Actividad ) {
+      actividad.estado = 'NUEVA';
       this.actividades = await this.storage.get('actividades');
       const existe = this.actividades.find( act => act === actividad );
 
@@ -36,21 +39,40 @@ export class StorageService {
       }
     }
 
+    async crearAccion( accion: Accion ) {
+      accion.estado = 'NUEVA';
+      this.acciones = await this.storage.get('acciones');
+      const existe = this.acciones.find( acc => acc === accion );
+      if ( !existe ) {
+        // AGREGAR
+        this.acciones.unshift(accion);
+        this.storage.set('acciones', this.acciones);
+        // Enviar a esa actividad
+      } else {
+        console.log('Ya ha sido agregado');
+        // Toast - enviar a esa actividad
+      }
+      this.datos.cargarVariables();
+    }
+
     async actualizarActividad( actividad: Actividad ) {
+      actividad.estado = 'ACTUALIZADO';
       this.actividades = await this.storage.get('actividades');
-      const existe = this.actividades.find( act => act._id === actividad._id );
+      const existe = this.actividades.find( act => act.nombre === actividad.nombre );
 
       if ( !existe ) {
         // AGREGAR
         this.actividades.unshift(actividad);
-        this.storage.set('actividades', this.actividades);
+        await this.storage.set('actividades', this.actividades);
+
         // Enviar a esa actividad
       } else {
-        this.actividades = this.actividades.filter(act => act._id !== actividad._id );
+        this.actividades = this.actividades.filter(act => act.nombre !== actividad.nombre );
         this.actividades.unshift(actividad);
-        this.storage.set('actividades', this.actividades);
+        await this.storage.set('actividades', this.actividades);
         // Toast - enviar a esa actividad
       }
+      this.datos.cargarVariables();
     }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Categoria, Actividad } from '../../pages/interfaces/interfaces';
-import { ModalController, NavController, AlertController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { DatosService } from '../../services/datos.service';
 import { NgForm } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
@@ -35,12 +35,11 @@ export class BuscarComponent implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private alertCtrl: AlertController,
     public datos: DatosService,
     public stor: StorageService,
     private us: LoginService,
     private navCtrl: NavController,
-    private val: ValidadorService
+    private val: ValidadorService,
   ) { }
 
   ngOnInit() {
@@ -59,6 +58,11 @@ export class BuscarComponent implements OnInit {
     const palabra = event.detail.value || '';
     this.newActividad.nombre = palabra;
     this.actividades = this.datos.actividades.filter( (bsq) => ( bsq.categoria === this.categoria._id && bsq.nombre.toLowerCase().indexOf( palabra.toLowerCase() ) > -1 ));
+
+    const acts = this.datos.actividades.filter( (bsq) => ( bsq.categoria === this.categoria._id && bsq.nombre.toLowerCase() === palabra.toLowerCase() ));
+    if (acts.length === 1) {
+      this.irAccion( this.actividades[0] );
+    }
   }
 
   async close() {
@@ -111,6 +115,12 @@ export class BuscarComponent implements OnInit {
         actividad: acti
       }
     });
+    modal.onDidDismiss().then( async (r) => {
+      if (r.data) {
+        this.buscador.value = r.data.nombre;
+      }
+    });
+
     return await modal.present();
   }
 

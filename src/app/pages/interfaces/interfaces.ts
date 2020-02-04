@@ -69,6 +69,7 @@ export interface Accion {
   actividad: string;
   creador: string;
   estado?: string;
+  valor: string;
   data: string;
 }
 
