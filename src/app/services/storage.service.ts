@@ -65,7 +65,7 @@ export class StorageService {
     }
 
     async actualizarActividad( actividad: Actividad ) {
-      
+
       this.actividades = await this.storage.get('actividades');
       const existe = this.actividades.find( act => act.nombre === actividad.nombre );
       actividad.estado = 'ACTUALIZADO';

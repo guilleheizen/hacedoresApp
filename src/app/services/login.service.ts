@@ -65,6 +65,7 @@ export class LoginService {
   }
 
   logOut() {
-    this.storage.clear();
+    this.storage.remove('staff');
+    this.storage.remove('login');
   }
 }

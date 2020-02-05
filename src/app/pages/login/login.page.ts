@@ -3,6 +3,7 @@ import { LoginService } from '../../services/login.service';
 import { NavController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { DatosService } from '../../services/datos.service';
+import { ValidadorService } from '../../services/validador.service';
 
 
 @Component({
@@ -15,18 +16,22 @@ export class LoginPage implements OnInit {
   loginUser = {
     email: 'guilleheizen@gmail.com',
     password: 'olakase'
-};
+  };
+
+  cargando = false;
 
   constructor(
     private log: LoginService,
     private navCtrl: NavController,
-    private datos: DatosService
+    private datos: DatosService,
+    private alerta: ValidadorService
   ) { }
 
   ngOnInit() {
   }
 
   async login( fLogin: NgForm ) {
+    this.cargando = true;
     if ( fLogin.invalid ) { return; }
     const valido = await this.log.login( this.loginUser.email, this.loginUser.password );
 
@@ -40,9 +45,11 @@ export class LoginPage implements OnInit {
         this.datos.getAcciones();
 
         this.navCtrl.navigateRoot( '/main/acciones', { animated: true } );
+        this.cargando = false;
     } else {
         // mostrar alerta de usuario y contraseña no correctos
-        // this.alerta.showToast('Login no válido');
+        this.cargando = false;
+        this.alerta.presentToast('Login no válido');
     }
   }
 }

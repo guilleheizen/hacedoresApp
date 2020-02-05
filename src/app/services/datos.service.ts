@@ -15,11 +15,12 @@ export class DatosService {
 
     headers: HttpHeaders;
 
-    public equipos: Equipo[];
-    public acampantes: Acampante[];
-    public categorias: Categoria[];
-    public actividades: Actividad[];
-    public acciones: Accion[];
+    public equipos: Equipo[] = [];
+    public acampantes: Acampante[] = [];
+    public categorias: Categoria[] = [];
+    public actividades: Actividad[] = [];
+    public acciones: Accion[] = [];
+    public eliminadas: Accion[] = [];
     public staff: Staff;
 
     constructor(
@@ -109,8 +110,14 @@ export class DatosService {
 
         this.http.get(`${ URL }/acciones/`, { headers }).subscribe( (resp: RespuestaAccion) => {
             if ( resp.ok ) {
-                this.acciones = resp.acciones;
-                this.storage.set('acciones', this.acciones);
+
+                const acciones = resp.acciones;
+
+                const viejas = this.eliminadas.filter( bsq => (bsq.estado === 'NUEVA' || bsq.estado === 'ELIMINADA' ) );
+                acciones.unshift(...viejas);
+                this.eliminadas = acciones;
+                this.acciones = acciones.filter( (bsq) => bsq.estado !== 'ELIMINADA' );
+                this.storage.set('acciones', this.eliminadas);
             } else {
                 this.storage.clear();
                 this.navCtrl.navigateForward('/login');
@@ -124,9 +131,15 @@ export class DatosService {
         this.acampantes = await this.storage.get('acampantes');
         this.categorias = await this.storage.get('categorias');
         this.actividades = await this.storage.get('actividades');
-
         const accioness = await this.storage.get('acciones');
-        this.acciones = accioness.filter( (bsq) => bsq.estado !== 'ELIMINADA' );
+        if ( accioness ) {
+            this.eliminadas = accioness;
+            this.acciones = accioness.filter( (bsq) => bsq.estado !== 'ELIMINADA' );
+        }
         this.staff = await this.storage.get('staff');
+    }
+
+    async sincronizarDatos() {
+        return true;
     }
 }

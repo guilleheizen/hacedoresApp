@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { NavController } from '@ionic/angular';
+import { DatosService } from '../../services/datos.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +12,7 @@ export class MenuComponent implements OnInit {
 
   constructor(
     public st: LoginService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
   ) { }
 
   ngOnInit() {}

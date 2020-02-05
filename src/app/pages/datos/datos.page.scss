@@ -3,3 +3,20 @@ ion-content {
     background-image: url('../../../assets/bg.png');
     --padding-bottom: 50px;
 }
+
+ion-card {
+    background-color: #ffffff;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+ion-card-header {
+    padding-bottom: 0px;
+}
+
+.chart {
+    width: 49%;
+    height: 100%;
+}
