@@ -124,7 +124,9 @@ export class DatosService {
         this.acampantes = await this.storage.get('acampantes');
         this.categorias = await this.storage.get('categorias');
         this.actividades = await this.storage.get('actividades');
-        this.acciones = await this.storage.get('acciones');
+
+        const accioness = await this.storage.get('acciones');
+        this.acciones = accioness.filter( (bsq) => bsq.estado !== 'ELIMINADA' );
         this.staff = await this.storage.get('staff');
     }
 }

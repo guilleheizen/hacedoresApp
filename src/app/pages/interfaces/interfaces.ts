@@ -67,6 +67,7 @@ export interface Accion {
   puntos: number;
   categoria: string;
   actividad: string;
+  participantes: string[];
   creador: string;
   estado?: string;
   valor: string;

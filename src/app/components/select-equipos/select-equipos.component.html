@@ -1,11 +1,17 @@
 <ion-content class="ion-padding ion-text-center">
-    <h1>Confirmar equipos</h1>
+    <h1>Confirmar Datos</h1>
     <ion-grid>
         <ion-row>
             <ion-col class="equipo" *ngFor="let eq of datos.equipos" (click)="selectEquipo(eq._id)">
                 <app-equipo *ngIf="actividad.participantes.indexOf(eq._id) !== -1 " [id]="eq._id" [estilo]="'contenedor-activo'"></app-equipo>
                 <app-equipo *ngIf="actividad.participantes.indexOf(eq._id) === -1 " [id]="eq._id" [estilo]="'contenedor'"></app-equipo>
             </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-label>Puntos </ion-label>
+                <ion-input name="puntos" type="number" [(ngModel)]="actividad.puntos" required #puntos></ion-input>
+            </ion-item>
         </ion-row>
     </ion-grid>
     <ion-button expand="block" mode="ios" color="primary" (click)="confirmar()">Confirmar</ion-button>

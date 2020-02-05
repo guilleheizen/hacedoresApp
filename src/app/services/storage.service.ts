@@ -55,11 +55,20 @@ export class StorageService {
       this.datos.cargarVariables();
     }
 
+    async eliminarAccion( accion: Accion ) {
+      this.acciones = await this.storage.get('acciones');
+      this.acciones = this.acciones.filter(acc => acc.nombre !== accion.nombre );
+      accion.estado = 'ELIMINADA';
+      this.acciones.push(accion);
+      this.datos.cargarVariables();
+      await this.storage.set('acciones', this.acciones);
+    }
+
     async actualizarActividad( actividad: Actividad ) {
-      actividad.estado = 'ACTUALIZADO';
+      
       this.actividades = await this.storage.get('actividades');
       const existe = this.actividades.find( act => act.nombre === actividad.nombre );
-
+      actividad.estado = 'ACTUALIZADO';
       if ( !existe ) {
         // AGREGAR
         this.actividades.unshift(actividad);

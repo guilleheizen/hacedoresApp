@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DatosService } from '../../services/datos.service';
 import { Actividad } from '../../pages/interfaces/interfaces';
 import { ModalController, NavController } from '@ionic/angular';
@@ -13,7 +13,7 @@ import { ValidadorService } from '../../services/validador.service';
 export class SelectEquiposComponent implements OnInit {
 
   @Input() actividad: Actividad;
-
+  @ViewChild('puntos', {  static: false })  puntos;
   constructor(
     public datos: DatosService,
     private modalCtrl: ModalController,
@@ -23,6 +23,13 @@ export class SelectEquiposComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    
+    setTimeout(() => {
+      this.puntos.setFocus();
+    }, 250);
   }
 
   selectEquipo( id: string ) {

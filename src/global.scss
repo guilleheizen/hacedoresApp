@@ -31,6 +31,12 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 .dialog-modal .modal-wrapper {
     width: 80%;
-    height: 240px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.dialog-modal2 .modal-wrapper {
+    width: 80%;
+    height: 70vh;
     border-radius: 10px;
 }

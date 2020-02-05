@@ -8,6 +8,8 @@ import { MenuComponent } from './menu/menu.component';
 import { BuscarComponent } from './buscar/buscar.component';
 import { EquipoComponent } from './equipo/equipo.component';
 import { SelectEquiposComponent } from './select-equipos/select-equipos.component';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { VerAccionComponent } from './ver-accion/ver-accion.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { SelectEquiposComponent } from './select-equipos/select-equipos.componen
     MenuComponent,
     BuscarComponent,
     EquipoComponent,
-    SelectEquiposComponent
+    SelectEquiposComponent,
+    CategoriaComponent,
+    VerAccionComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,9 @@ import { SelectEquiposComponent } from './select-equipos/select-equipos.componen
     MenuComponent,
     BuscarComponent,
     EquipoComponent,
-    SelectEquiposComponent
+    SelectEquiposComponent,
+    CategoriaComponent,
+    VerAccionComponent
   ],
 })
 

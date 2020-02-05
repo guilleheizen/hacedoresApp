@@ -43,7 +43,7 @@ export class AccionPage implements OnInit {
     this.cargarDatos();
     setTimeout(() => {
       this.nom.setFocus();
-    }, 250);
+    }, 350);
   }
 
 
@@ -56,7 +56,7 @@ export class AccionPage implements OnInit {
     } else {
       this.categoria.signo = '-';
     }
-
+    this.newAccion.titulo = this.actividad.nombre+' - ';
   }
 
   selectEquipo(id: string) {
@@ -82,6 +82,7 @@ export class AccionPage implements OnInit {
       puntos: this.actividad.puntos,
       categoria: this.categoria._id,
       actividad: this.actividad.nombre,
+      participantes: this.actividad.participantes,
       creador: this.datos.staff._id,
       estado: 'CREADA',
       valor: this.categoria.valor,

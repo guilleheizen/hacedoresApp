@@ -1,18 +1,18 @@
 <ion-content class="ion-padding">
-    <ion-title mode="ios" *ngIf="datos.acciones.length < 1">
+    <ion-title mode="ios" *ngIf="!datos.acciones || datos.acciones.length < 1">
         No hay registros
     </ion-title>
-    <ion-list class="ion-text-center" *ngIf="datos.acciones.length > 0">
+    <ion-list class="ion-text-center" *ngIf="datos.acciones &&  datos.acciones.length >= 1">
         <h1>Tus registros</h1>
-        <ion-item *ngFor="let ac of datos.acciones">
+        <ion-item *ngFor="let ac of datos.acciones" (click)="presentModal(ac)">
             <ion-avatar slot="start">
                 <app-equipo class="cor" [id]="ac.equipo" [estilo]="'img'"></app-equipo>
             </ion-avatar>
-            <ion-label>{{ ac.nombre }}</ion-label>
+            <ion-label>{{ ac.nombre | titlecase }}</ion-label>
 
-            <ion-badge color="danger" *ngIf="ac.valor === 'negativo' ">{{ ac.puntos }}</ion-badge>
-            <ion-badge color="success" *ngIf="ac.valor === 'positivo' ">{{ ac.puntos }}</ion-badge>
-            <ion-icon name="eye" slot="end"></ion-icon>
+            <ion-badge color="danger" mode="ios" *ngIf="ac.valor === 'negativo' ">{{ ac.puntos }}</ion-badge>
+            <ion-badge color="success" mode="ios" *ngIf="ac.valor === 'positivo' ">{{ ac.puntos }}</ion-badge>
+            <app-categoria [id]="ac.categoria"></app-categoria>
         </ion-item>
     </ion-list>
 
