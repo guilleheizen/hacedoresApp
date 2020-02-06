@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-import { Staff } from '../pages/interfaces/interfaces';
+import { Staff } from '../interfaces/interfaces';
 import { NavController } from '@ionic/angular';
 
 const URL = environment.url;
@@ -32,7 +32,7 @@ export class LoginService {
           resolve(true);
         } else {
           this.token = null;
-          this.storage.clear();
+          this.logOut();
           resolve(false);
         }
       });

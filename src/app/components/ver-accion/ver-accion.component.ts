@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Accion } from 'src/app/pages/interfaces/interfaces';
+import { Accion } from 'src/app/interfaces/interfaces';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 

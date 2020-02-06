@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Categoria } from 'src/app/pages/interfaces/interfaces';
+import { Categoria } from 'src/app/interfaces/interfaces';
 import { DatosService } from 'src/app/services/datos.service';
 
 @Component({

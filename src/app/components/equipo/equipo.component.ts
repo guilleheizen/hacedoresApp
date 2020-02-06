@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DatosService } from '../../services/datos.service';
-import { Equipo } from '../../pages/interfaces/interfaces';
+import { Equipo } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-equipo',

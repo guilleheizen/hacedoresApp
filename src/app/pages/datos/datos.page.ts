@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DatosService } from '../../services/datos.service';
 import { Chart } from 'chart.js';
-import { Equipo } from '../interfaces/interfaces';
+import { Equipo } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-datos',

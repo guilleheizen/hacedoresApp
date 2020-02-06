@@ -4,7 +4,7 @@ import { LoginService } from '../../services/login.service';
 import { DatosService } from '../../services/datos.service';
 import { ModalController } from '@ionic/angular';
 import { BuscarComponent } from '../../components/buscar/buscar.component';
-import { Categoria } from '../interfaces/interfaces';
+import { Categoria } from '../../interfaces/interfaces';
 
 
 @Component({

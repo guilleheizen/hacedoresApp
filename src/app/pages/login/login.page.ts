@@ -14,8 +14,8 @@ import { ValidadorService } from '../../services/validador.service';
 export class LoginPage implements OnInit {
 
   loginUser = {
-    email: 'guilleheizen@gmail.com',
-    password: 'olakase'
+    email: '',
+    password: ''
   };
 
   cargando = false;
@@ -36,13 +36,7 @@ export class LoginPage implements OnInit {
     const valido = await this.log.login( this.loginUser.email, this.loginUser.password );
 
     if ( valido ) {
-        this.datos.getHeaders();
-        // navegar al tabs
-        this.datos.getEquipos();
-        this.datos.getAcampantes();
-        this.datos.getCategorias();
-        this.datos.getActividades();
-        this.datos.getAcciones();
+        this.datos.getInformation();
 
         this.navCtrl.navigateRoot( '/main/acciones', { animated: true } );
         this.cargando = false;

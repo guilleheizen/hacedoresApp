@@ -89,6 +89,5 @@ export interface Actividad {
   estado: string;
   creador: string;
   posEquipo?: number[];
-  orden?: number;
   data: Date;
 }

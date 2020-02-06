@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Equipo, Categoria, Accion, Actividad, Acampante, RespuestaEquipo, RespuestaCategoria, RespuestaAccion, RespuestaActividad, RespuestaAcampante } from '../pages/interfaces/interfaces';
+import { Equipo, Categoria, Accion, Actividad, Acampante, RespuestaEquipo, RespuestaCategoria, RespuestaAccion, RespuestaActividad, RespuestaAcampante } from '../interfaces/interfaces';
 import { LoginService } from './login.service';
 import { DatosService } from './datos.service';
 
@@ -64,11 +64,33 @@ export class StorageService {
       await this.storage.set('acciones', this.acciones);
     }
 
-    async actualizarActividad( actividad: Actividad ) {
+    async actualizarAccion( accion: Accion, estado: string ) {
+
+      this.acciones = await this.storage.get('acciones');
+      const existe = this.acciones.find( acc => acc.nombre === accion.nombre );
+      accion.estado = estado;
+
+      if ( !existe ) {
+        // AGREGAR
+        this.acciones.unshift(accion);
+        await this.storage.set('acciones', this.acciones);
+        // Enviar a esa actividad
+      } else {
+        this.acciones = this.acciones.filter(acc => acc.nombre !== accion.nombre );
+        this.acciones.unshift(accion);
+        await this.storage.set('acciones', this.acciones);
+        // Toast - enviar a esa actividad
+      }
+      this.datos.cargarVariables();
+    }
+
+    async actualizarActividad( actividad: Actividad, estado: string ) {
 
       this.actividades = await this.storage.get('actividades');
       const existe = this.actividades.find( act => act.nombre === actividad.nombre );
-      actividad.estado = 'ACTUALIZADO';
+      actividad.estado = estado;
+      actividad.data = new Date();
+
       if ( !existe ) {
         // AGREGAR
         this.actividades.unshift(actividad);
@@ -82,6 +104,16 @@ export class StorageService {
         // Toast - enviar a esa actividad
       }
       this.datos.cargarVariables();
+    }
+
+    async limpiarAA() {
+      this.datos.eliminadas = [];
+      this.datos.acciones = [];
+      this.datos.actividades = [];
+      await this.storage.remove('acciones');
+      await this.storage.remove('actividades');
+      await this.datos.getActividades();
+      await this.datos.getAcciones();
     }
 
 }

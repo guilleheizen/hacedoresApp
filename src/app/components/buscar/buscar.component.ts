@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Categoria, Actividad } from '../../pages/interfaces/interfaces';
+import { Categoria, Actividad } from '../../interfaces/interfaces';
 import { ModalController, NavController } from '@ionic/angular';
 import { DatosService } from '../../services/datos.service';
 import { NgForm } from '@angular/forms';

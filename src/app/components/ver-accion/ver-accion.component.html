@@ -1,41 +1,41 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>{{ accion.nombre | titlecase }}</ion-title>
-    <ion-buttons slot="primary">
-      <ion-button color="primary" (click)="close()">
-        <ion-icon slot="icon-only" name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>{{ accion.nombre | titlecase }}</ion-title>
+        <ion-buttons slot="primary">
+            <ion-button color="primary" (click)="close()">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-grid class="ion-text-center">
-    <h1 *ngIf="accion.valor === 'positivo'">Ganador</h1>
-    <h1 *ngIf="accion.valor === 'negativo'">Perdedor</h1>
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col size="8">
-        <app-equipo [id]="accion.equipo" [estilo]="'contenedor-activo'"></app-equipo>
-      </ion-col>
-      <ion-col></ion-col>
-    </ion-row>
-    <h1 *ngIf="accion.valor === 'positivo'">Participantes</h1>
-    <ion-row class="ion-padding" *ngIf="accion.valor === 'positivo'">
-      <ion-col *ngFor="let par of accion.participantes; index as i" class="ion-no-padding">
-        <app-equipo [id]="par" [estilo]="'contenedor'"></app-equipo>
-      </ion-col>
-    </ion-row>
-    <ion-row >
-      <h1 *ngIf="accion.valor === 'positivo'" class="puntos pos" >{{' + '+ accion.puntos}}</h1>
-      <h1 *ngIf="accion.valor === 'negativo'" class="puntos neg" >{{' - '+ accion.puntos}}</h1>
-    </ion-row>
-    <ion-row>
-      <h1>{{ accion.nombre | titlecase }}</h1>
-      <p>{{ accion.observaciones }}</p>
-      <h1>{{ accion.data | date:'short' }}</h1>
-    </ion-row>
-    <h1 *ngIf="accion.estado === 'SINCRONIZADA' ">Ya sincronizado</h1>
-    <ion-button *ngIf="accion.estado !== 'SINCRONIZADA' " mode="ios" expand="block" color="danger" (click)="eliminar()"> Eliminar registro </ion-button>
-  </ion-grid>
-  
+    <ion-grid class="ion-text-center">
+        <h1 *ngIf="accion.valor === 'positivo'">Ganador</h1>
+        <h1 *ngIf="accion.valor === 'negativo'">Perdedor</h1>
+        <ion-row>
+            <ion-col></ion-col>
+            <ion-col size="8">
+                <app-equipo [id]="accion.equipo" [estilo]="'contenedor-activo'"></app-equipo>
+            </ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+        <h1 *ngIf="accion.valor === 'positivo'">Participantes</h1>
+        <ion-row class="ion-padding" *ngIf="accion.valor === 'positivo'">
+            <ion-col *ngFor="let par of accion.participantes; index as i" class="ion-no-padding">
+                <app-equipo [id]="par" [estilo]="'contenedor'"></app-equipo>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <h1 *ngIf="accion.valor === 'positivo'" class="puntos pos">{{' + '+ accion.puntos}}</h1>
+            <h1 *ngIf="accion.valor === 'negativo'" class="puntos neg">{{' - '+ accion.puntos}}</h1>
+        </ion-row>
+        <ion-row>
+            <h1>{{ accion.nombre | titlecase }}</h1>
+            <p>{{ accion.observaciones }}</p>
+            <h1>{{ accion.data | date:'short' }}</h1>
+        </ion-row>
+        <ion-button *ngIf="accion.estado === 'ACTUALIZADA' " mode="ios" expand="block" color="success">Ya sincronizado</ion-button>
+        <ion-button *ngIf="accion.estado !== 'ACTUALIZADA' " mode="ios" expand="block" color="danger" (click)="eliminar()"> Eliminar registro </ion-button>
+    </ion-grid>
+
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DatosService } from '../../services/datos.service';
-import { Actividad } from '../../pages/interfaces/interfaces';
+import { Actividad } from '../../interfaces/interfaces';
 import { ModalController, NavController } from '@ionic/angular';
 import { StorageService } from '../../services/storage.service';
 import { ValidadorService } from '../../services/validador.service';
@@ -48,7 +48,7 @@ export class SelectEquiposComponent implements OnInit {
   }
 
   confirmar() {
-    this.stor.actualizarActividad(this.actividad);
+    this.stor.actualizarActividad(this.actividad, 'ACTUALIZADA');
     this.close();
   }
   async close() {

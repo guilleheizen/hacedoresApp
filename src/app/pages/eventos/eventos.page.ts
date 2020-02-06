@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatosService } from 'src/app/services/datos.service';
-import { Accion } from '../interfaces/interfaces';
+import { Accion } from '../../interfaces/interfaces';
 import { ModalController } from '@ionic/angular';
 import { VerAccionComponent } from 'src/app/components/ver-accion/ver-accion.component';
 

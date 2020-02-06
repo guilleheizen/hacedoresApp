@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-import { Equipo, Categoria, Accion, Actividad, Acampante, RespuestaEquipo, RespuestaCategoria, RespuestaAccion, RespuestaActividad, RespuestaAcampante, Staff } from '../pages/interfaces/interfaces';
+import { Equipo, Categoria, Accion, Actividad, Acampante, RespuestaEquipo, RespuestaCategoria, RespuestaAccion, RespuestaActividad, RespuestaAcampante, Staff } from '../interfaces/interfaces';
 import { NavController } from '@ionic/angular';
 import { LoginService } from './login.service';
+import { StorageService } from './storage.service';
 
 const URL = environment.url;
 
@@ -40,75 +41,100 @@ export class DatosService {
     }
 
     // TRAER DATOS
-    getEquipos() {
+    async getEquipos() {
 
         const headers = this.headers;
 
-        this.http.get(`${ URL }/equipos/`, { headers }).subscribe( (resp: RespuestaEquipo) => {
+        await this.http.get(`${ URL }/equipos/`, { headers }).subscribe( (resp: RespuestaEquipo) => {
             if ( resp.ok ) {
                 this.equipos = resp.equipos;
                 this.storage.set('equipos', this.equipos);
             } else {
-                this.storage.clear();
+                this.logOut();
                 this.navCtrl.navigateForward('/login');
             }
         });
 
     }
 
-    getAcampantes() {
+    async getAcampantes() {
 
         const headers = this.headers;
 
-        this.http.get(`${ URL }/acampantes/`, { headers }).subscribe( (resp: RespuestaAcampante) => {
+        await this.http.get(`${ URL }/acampantes/`, { headers }).subscribe( (resp: RespuestaAcampante) => {
             if ( resp.ok ) {
                 this.acampantes = resp.acampantes;
                 this.storage.set('acampantes', this.acampantes);
             } else {
-                this.storage.clear();
+                this.logOut();
                 this.navCtrl.navigateForward('/login');
             }
         });
 
     }
 
-    getCategorias() {
+    async getCategorias() {
 
         const headers = this.headers;
 
-        this.http.get(`${ URL }/categorias/`, { headers }).subscribe( (resp: RespuestaCategoria) => {
+        await this.http.get(`${ URL }/categorias/`, { headers }).subscribe( (resp: RespuestaCategoria) => {
             if ( resp.ok ) {
                 this.categorias = resp.categorias;
                 this.storage.set('categorias', this.categorias);
             } else {
-                this.storage.clear();
+                this.logOut();
                 this.navCtrl.navigateForward('/login');
             }
         });
 
     }
 
-    getActividades() {
+    async getActividades() {
 
         const headers = this.headers;
 
-        this.http.get(`${ URL }/actividades/`, { headers }).subscribe( (resp: RespuestaActividad) => {
+        await this.http.get(`${ URL }/actividades/`, { headers }).subscribe( (resp: RespuestaActividad) => {
+
             if ( resp.ok ) {
-                this.actividades = resp.actividades;
+
+                const actividades = resp.actividades;
+                const noActualizadas = ( this.actividades ) ? this.actividades.filter( bsq => (bsq.estado === 'NUEVA') ) : [];
+
+                actividades.unshift(...noActualizadas);
+                this.actividades = actividades;
                 this.storage.set('actividades', this.actividades);
             } else {
-                this.storage.clear();
+                this.logOut();
                 this.navCtrl.navigateForward('/login');
             }
         });
 
     }
 
-    getAcciones() {
+
+    async syncActividad( actividad: Actividad, estado: string ) {
+
+        actividad.estado = estado;
+        const headers = this.headers;
+
+        await this.http.post(`${ URL }/actividades/add/`, actividad, { headers }).subscribe( (resp: RespuestaActividad) => {});
+
+    }
+
+    async syncAccion( accion: Accion, estado: string ) {
+
+        accion.estado = estado;
+        const headers = this.headers;
+
+        await this.http.post(`${ URL }/acciones/add/`, accion, { headers }).subscribe( (resp: RespuestaAccion) => {});
+
+    }
+
+    async getAcciones() {
 
         const headers = this.headers;
 
-        this.http.get(`${ URL }/acciones/`, { headers }).subscribe( (resp: RespuestaAccion) => {
+        await this.http.get(`${ URL }/acciones/`, { headers }).subscribe( (resp: RespuestaAccion) => {
             if ( resp.ok ) {
 
                 const acciones = resp.acciones;
@@ -116,10 +142,10 @@ export class DatosService {
                 const viejas = this.eliminadas.filter( bsq => (bsq.estado === 'NUEVA' || bsq.estado === 'ELIMINADA' ) );
                 acciones.unshift(...viejas);
                 this.eliminadas = acciones;
-                this.acciones = acciones.filter( (bsq) => bsq.estado !== 'ELIMINADA' );
+                this.acciones = acciones.filter( (bsq) => bsq.estado !== 'ELIMINADA' &&  bsq.estado !== 'ACTUALIZADA-ELIMINADA');
                 this.storage.set('acciones', this.eliminadas);
             } else {
-                this.storage.clear();
+                this.logOut();
                 this.navCtrl.navigateForward('/login');
             }
         });
@@ -134,12 +160,29 @@ export class DatosService {
         const accioness = await this.storage.get('acciones');
         if ( accioness ) {
             this.eliminadas = accioness;
-            this.acciones = accioness.filter( (bsq) => bsq.estado !== 'ELIMINADA' );
+            this.acciones = await accioness.filter( (bsq) => bsq.estado !== 'ELIMINADA' && bsq.estado !== 'ACTUALIZADA-ELIMINADA' );
         }
         this.staff = await this.storage.get('staff');
     }
 
     async sincronizarDatos() {
         return true;
+    }
+
+    logOut() {
+        this.storage.remove('staff');
+        this.storage.remove('login');
+    }
+
+    async getInformation() {
+
+        this.getHeaders();
+        // navegar al tabs
+        await this.getEquipos();
+        await this.getAcampantes();
+        await this.getCategorias();
+        await this.getActividades();
+        await this.getAcciones();
+
     }
 }

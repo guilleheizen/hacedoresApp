@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { Actividad } from '../pages/interfaces/interfaces';
+import { Actividad } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class ValidadorService {
 
   constructor( public toastController: ToastController  ) { }
 
-  
+
   async presentToast( mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -19,7 +19,7 @@ export class ValidadorService {
     toast.present();
   }
 
-  validarActividad( actividad: Actividad ){
+  validarActividad( actividad: Actividad ) {
     if ( actividad.nombre.length < 4 ) {
       this.presentToast('Ingrese un Nombre válido');
       return false;

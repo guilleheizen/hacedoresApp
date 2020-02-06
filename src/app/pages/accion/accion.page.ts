@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DatosService } from '../../services/datos.service';
-import { Actividad, Categoria, Accion } from '../interfaces/interfaces';
+import { Actividad, Categoria, Accion } from '../../interfaces/interfaces';
 import { Platform, NavController } from '@ionic/angular';
 import { ValidadorService } from '../../services/validador.service';
 import { StorageService } from '../../services/storage.service';
