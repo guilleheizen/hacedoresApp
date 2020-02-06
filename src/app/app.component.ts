@@ -23,6 +23,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then( async () => {
       await this.login.cargarCredenciales();
+      this.statusBar.backgroundColorByHexString('#ffffff');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
