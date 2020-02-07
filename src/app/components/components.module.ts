@@ -10,6 +10,7 @@ import { EquipoComponent } from './equipo/equipo.component';
 import { SelectEquiposComponent } from './select-equipos/select-equipos.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { VerAccionComponent } from './ver-accion/ver-accion.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { VerAccionComponent } from './ver-accion/ver-accion.component';
     RouterModule,
     FormsModule,
     IonicModule,
+    PipesModule
   ], exports: [
     MenuComponent,
     BuscarComponent,

@@ -5,6 +5,7 @@ import { DatosService } from '../../services/datos.service';
 import { Actividad, Accion } from 'src/app/interfaces/interfaces';
 import { StorageService } from '../../services/storage.service';
 import { LoadingController } from '@ionic/angular';
+import { ValidadorService } from '../../services/validador.service';
 
 @Component({
   selector: 'app-menu',
@@ -18,12 +19,14 @@ export class MenuComponent implements OnInit {
     private navCtrl: NavController,
     private datos: DatosService,
     private stor: StorageService,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    private val: ValidadorService,
   ) { }
 
   ngOnInit() {}
 
-  cerrarSesion() {
+  async cerrarSesion() {
+    await this.sincronizar();
     this.st.logOut();
     this.navCtrl.navigateRoot('/login');
   }
@@ -39,17 +42,30 @@ export class MenuComponent implements OnInit {
         if ( acc.estado === 'ELIMINADA') {
           estado = 'ACTUALIZADA-ELIMINADA';
         }
-        this.datos.syncAccion( acc, estado );
+        const actualizado = this.datos.syncAccion( acc, estado );
+        if ( !actualizado ) {
+          this.val.presentToast('Error al sincronizar');
+          return false;
+        }
       }
     });
+
     const actividades = this.datos.actividades;
+
     await actividades.forEach(  ( act: Actividad ) => {
       const estado = 'ACTIVA';
 
       if (act.estado === 'NUEVA' || act.estado === 'ACTUALIZADA') {
-        this.datos.syncActividad( act, estado );
+
+        const actualizado = this.datos.syncActividad( act, estado );
+
+        if ( !actualizado ) {
+          this.val.presentToast('Error al sincronizar');
+          return false;
+        }
       }
     });
+
     await this.stor.limpiarAA();
   }
 

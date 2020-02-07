@@ -1,27 +1,33 @@
-
-h1, p{
+h1,
+p {
     width: 100%;
     padding: 5px 10px;
-    margin:0px;
-
+    margin: 0px;
 }
-.puntos{
-    font-size: 100px;
+
+.puntos {
+    font-size: 80px;
+    letter-spacing: -0.07em;
     font-weight: bold;
-    line-height: 85px;
+    line-height: 70px;
     letter-spacing: -5px;
-    margin:0px 0px 10px 0px;
-    padding:0px;
+    margin: 10px 0px;
+    padding: 0px;
 }
 
-.pos{
+.pos {
+    margin-top: 10px;
     color: #5bd33d;
 }
 
-.neg{
+.neg {
     color: #dd3131;
 }
 
-ion-col p{
-    margin:.45em 0px;
+ion-col p {
+    margin: .45em 0px;
+}
+
+.participantes {
+    margin-top: 10px;
 }

@@ -5,7 +5,7 @@
                 <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
             </ion-button>
         </ion-buttons>
-        <ion-title [ngStyle]="{'color':categoria.color }"><b>{{ categoria.nombre }}</b></ion-title>
+        <ion-title [ngStyle]="{'color':categoria.color }"><b>{{ categoria.nombre | capital }}</b></ion-title>
         <ion-buttons slot="end">
             <ion-button [ngStyle]="{'color':categoria.color }">
                 <ion-icon slot="icon-only" [name]="categoria.icono"></ion-icon>
@@ -30,13 +30,13 @@
                         <ion-avatar *ngFor=" let par of acti.participantes" slot="start">
                             <app-equipo class="cor" [id]="par" [estilo]="'img'"></app-equipo>
                         </ion-avatar>
-                        <ion-label>{{ acti.nombre }}</ion-label>
+                        <ion-label>{{ acti.nombre | capital }}</ion-label>
                     </ion-item>
                 </ion-list>
 
                 <ion-list class="lista ion-text-center" *ngIf="actividades.length < 1">
                     <form (ngSubmit)="enviar( fActividad )" #fActividad="ngForm">
-                        <h3> Crear {{ categoria.nombre }}</h3>
+                        <h3> Crear {{ categoria.nombre | capital }}</h3>
                         <ion-item>
                             <ion-icon name="bookmark" slot="start"></ion-icon>
                             <ion-input type="text" [(ngModel)]="newActividad.nombre" name="nombre" placeholder="Nombre:" required></ion-input>

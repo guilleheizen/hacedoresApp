@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>{{ accion.nombre | titlecase }}</ion-title>
+        <ion-title>{{ accion.nombre | capital }}</ion-title>
         <ion-buttons slot="primary">
             <ion-button color="primary" (click)="close()">
                 <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -20,7 +20,7 @@
             <ion-col></ion-col>
         </ion-row>
         <h1 *ngIf="accion.valor === 'positivo'">Participantes</h1>
-        <ion-row class="ion-padding" *ngIf="accion.valor === 'positivo'">
+        <ion-row class="participantes" *ngIf="accion.valor === 'positivo'">
             <ion-col *ngFor="let par of accion.participantes; index as i" class="ion-no-padding">
                 <app-equipo [id]="par" [estilo]="'contenedor'"></app-equipo>
             </ion-col>
@@ -30,8 +30,8 @@
             <h1 *ngIf="accion.valor === 'negativo'" class="puntos neg">{{' - '+ accion.puntos}}</h1>
         </ion-row>
         <ion-row>
-            <h1>{{ accion.nombre | titlecase }}</h1>
-            <p>{{ accion.observaciones }}</p>
+            <h1>{{ accion.nombre | capital }}</h1>
+            <p>{{ accion.observaciones | capital }}</p>
             <h1>{{ accion.data | date:'short' }}</h1>
         </ion-row>
         <ion-button *ngIf="accion.estado === 'ACTUALIZADA' " mode="ios" expand="block" color="success">Ya sincronizado</ion-button>

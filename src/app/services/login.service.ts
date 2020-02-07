@@ -51,7 +51,7 @@ export class LoginService {
 
   async validarCredenciales(): Promise<boolean> {
     await this.cargarCredenciales();
-    if ( !this.token ) {
+    if ( !this.token || !this.staff.nombre ) {
       this.navCtrl.navigateRoot('/login');
       return Promise.resolve(false);
     } else {

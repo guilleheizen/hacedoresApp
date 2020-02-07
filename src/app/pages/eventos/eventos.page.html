@@ -8,7 +8,7 @@
             <ion-avatar slot="start">
                 <app-equipo class="cor" [id]="ac.equipo" [estilo]="'img'"></app-equipo>
             </ion-avatar>
-            <ion-label>{{ ac.nombre | titlecase }}</ion-label>
+            <ion-label>{{ ac.nombre | capital }}</ion-label>
 
             <ion-badge color="danger" mode="ios" *ngIf="ac.valor === 'negativo' ">{{ ac.puntos }}</ion-badge>
             <ion-badge color="success" mode="ios" *ngIf="ac.valor === 'positivo' ">{{ ac.puntos }}</ion-badge>

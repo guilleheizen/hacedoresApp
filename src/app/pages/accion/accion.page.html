@@ -3,8 +3,8 @@
     <ion-grid *ngIf="categoria" [ngStyle]="{'background-color':categoria.color }">
 
         <ion-row>
-            <h2>{{ nombre }}</h2>
-            <p> {{ actividad.observaciones }} </p>
+            <h2>{{ nombre | capital }}</h2>
+            <p> {{ actividad.observaciones | capital }} </p>
             <h1> {{ categoria.signo }} {{ actividad.puntos }} </h1>
         </ion-row>
         <ion-row class="obs">

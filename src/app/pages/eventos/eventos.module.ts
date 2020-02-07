@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { EventosPage } from './eventos.page';
 import { ComponentsModule } from '../../components/components.module';
 import { VerAccionComponent } from 'src/app/components/ver-accion/ver-accion.component';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { VerAccionComponent } from 'src/app/components/ver-accion/ver-accion.com
     CommonModule,
     FormsModule,
     ComponentsModule,
+    PipesModule,
     RouterModule.forChild([{ path: '', component: EventosPage }])
   ],
   declarations: [EventosPage],

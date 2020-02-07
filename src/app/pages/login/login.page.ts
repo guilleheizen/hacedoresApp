@@ -31,8 +31,13 @@ export class LoginPage implements OnInit {
   }
 
   async login( fLogin: NgForm ) {
+
     this.cargando = true;
-    if ( fLogin.invalid ) { return; }
+    if ( fLogin.invalid ) {
+      this.cargando = false;
+      this.alerta.presentToast('Login no válido');
+      return;
+    }
     const valido = await this.log.login( this.loginUser.email, this.loginUser.password );
 
     if ( valido ) {

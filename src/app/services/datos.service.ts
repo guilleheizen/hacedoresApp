@@ -5,7 +5,6 @@ import { Storage } from '@ionic/storage';
 import { Equipo, Categoria, Accion, Actividad, Acampante, RespuestaEquipo, RespuestaCategoria, RespuestaAccion, RespuestaActividad, RespuestaAcampante, Staff } from '../interfaces/interfaces';
 import { NavController } from '@ionic/angular';
 import { LoginService } from './login.service';
-import { StorageService } from './storage.service';
 
 const URL = environment.url;
 
@@ -17,7 +16,7 @@ export class DatosService {
     headers: HttpHeaders;
 
     public equipos: Equipo[] = [];
-    public acampantes: Acampante[] = [];
+    // public acampantes: Acampante[] = [];
     public categorias: Categoria[] = [];
     public actividades: Actividad[] = [];
     public acciones: Accion[] = [];
@@ -57,21 +56,21 @@ export class DatosService {
 
     }
 
-    async getAcampantes() {
+    // async getAcampantes() {
 
-        const headers = this.headers;
+    //     const headers = this.headers;
 
-        await this.http.get(`${ URL }/acampantes/`, { headers }).subscribe( (resp: RespuestaAcampante) => {
-            if ( resp.ok ) {
-                this.acampantes = resp.acampantes;
-                this.storage.set('acampantes', this.acampantes);
-            } else {
-                this.logOut();
-                this.navCtrl.navigateForward('/login');
-            }
-        });
+    //     await this.http.get(`${ URL }/acampantes/`, { headers }).subscribe( (resp: RespuestaAcampante) => {
+    //         if ( resp.ok ) {
+    //             this.acampantes = resp.acampantes;
+    //             this.storage.set('acampantes', this.acampantes);
+    //         } else {
+    //             this.logOut();
+    //             this.navCtrl.navigateForward('/login');
+    //         }
+    //     });
 
-    }
+    // }
 
     async getCategorias() {
 
@@ -116,18 +115,32 @@ export class DatosService {
 
         actividad.estado = estado;
         const headers = this.headers;
-
-        await this.http.post(`${ URL }/actividades/add/`, actividad, { headers }).subscribe( (resp: RespuestaActividad) => {});
-
+        return new Promise( resolve => {
+            this.http.post(`${ URL }/actividades/add/`, actividad, { headers }).subscribe( (resp: RespuestaActividad) => {
+                console.log(resp);
+                if ( resp.ok ) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            });
+        });
     }
 
     async syncAccion( accion: Accion, estado: string ) {
 
         accion.estado = estado;
         const headers = this.headers;
-
-        await this.http.post(`${ URL }/acciones/add/`, accion, { headers }).subscribe( (resp: RespuestaAccion) => {});
-
+        return new Promise( resolve => {
+            this.http.post(`${ URL }/acciones/add/`, accion, { headers }).subscribe( (resp: RespuestaAccion) => {
+                console.log(resp);
+                if ( resp.ok ) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            });
+        });
     }
 
     async getAcciones() {
@@ -154,7 +167,7 @@ export class DatosService {
 
     async cargarVariables() {
         this.equipos = await this.storage.get('equipos');
-        this.acampantes = await this.storage.get('acampantes');
+        // this.acampantes = await this.storage.get('acampantes');
         this.categorias = await this.storage.get('categorias');
         this.actividades = await this.storage.get('actividades');
         const accioness = await this.storage.get('acciones');
@@ -179,7 +192,7 @@ export class DatosService {
         this.getHeaders();
         // navegar al tabs
         await this.getEquipos();
-        await this.getAcampantes();
+        // await this.getAcampantes();
         await this.getCategorias();
         await this.getActividades();
         await this.getAcciones();
