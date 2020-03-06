@@ -187,6 +187,10 @@ export class DatosService {
         this.storage.remove('login');
     }
 
+    cargarAcciones(){
+        return this.acciones;
+    }
+
     async getInformation() {
 
         this.getHeaders();

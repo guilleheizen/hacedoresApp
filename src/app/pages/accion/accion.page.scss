@@ -1,6 +1,6 @@
 ion-grid {
     width: 100vw;
-    min-height: 95vh;
+    min-height: 100vh;
     margin: 0px;
     padding: 20px 30px;
 }
@@ -58,4 +58,8 @@ ion-content {
 .equipo img.active {
     opacity: 1;
     filter: grayscale(0%);
+}
+
+.botones{
+    margin-bottom: 10px;
 }

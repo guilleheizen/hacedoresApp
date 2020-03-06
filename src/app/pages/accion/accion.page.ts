@@ -46,6 +46,10 @@ export class AccionPage implements OnInit {
     }, 350);
   }
 
+  capital( str: string){
+    const capital = str[0].toUpperCase()+str.substr(1);
+    return capital;
+  }
 
   async cargarDatos() {
     await this.datos.cargarVariables();
@@ -56,7 +60,7 @@ export class AccionPage implements OnInit {
     } else {
       this.categoria.signo = '-';
     }
-    this.newAccion.titulo = this.actividad.nombre+' - ';
+    this.newAccion.titulo = this.capital(this.actividad.nombre+' - ');
   }
 
   selectEquipo(id: string) {
@@ -96,6 +100,8 @@ export class AccionPage implements OnInit {
     this.newAccion.observacion = '';
   }
 
-
+  cambiarDescripcion(desc: string) {
+    this.newAccion.titulo = this.capital(this.actividad.nombre+' - '+desc);
+  }
 
 }

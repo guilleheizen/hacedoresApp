@@ -13,18 +13,31 @@
                     <ion-icon name="bookmark" slot="start"></ion-icon>
                     <ion-input type="text" name="nom" placeholder="Nombre:" [(ngModel)]="newAccion.titulo" #nom></ion-input>
                 </ion-item>
+                <h2>Puestos</h2>
+                <ion-row class="botones">
+                    <ion-col><ion-button (click)="cambiarDescripcion('1er puesto')" expand="block" color="light" mode="ios">1ero</ion-button></ion-col>
+                    <ion-col><ion-button (click)="cambiarDescripcion('2do puesto')" expand="block" color="light" mode="ios">2do</ion-button></ion-col>
+                    <ion-col><ion-button (click)="cambiarDescripcion('3er puesto')" expand="block" color="light" mode="ios">3ero</ion-button></ion-col>
+                    <ion-col><ion-button (click)="cambiarDescripcion('4to puesto')" expand="block" color="light" mode="ios">4to</ion-button></ion-col>
+                </ion-row>
+                <h2>Enfrentamientos</h2>
+                <ion-row class="botones">
+                    <ion-col><ion-button (click)="cambiarDescripcion('1er enfrentamiento')" expand="block" color="light" mode="ios">1ero</ion-button></ion-col>
+                    <ion-col><ion-button (click)="cambiarDescripcion('2do enfrentamiento')" expand="block" color="light" mode="ios">2do</ion-button></ion-col>
+                    <ion-col><ion-button (click)="cambiarDescripcion('3er enfrentamiento')" expand="block" color="light" mode="ios">3ero</ion-button></ion-col>
+                    <ion-col><ion-button (click)="cambiarDescripcion('4to enfrentamiento')" expand="block" color="light" mode="ios">4to</ion-button></ion-col>
+                    <ion-col><ion-button (click)="cambiarDescripcion('5to enfrentamiento')" expand="block" color="light" mode="ios">5to</ion-button></ion-col>
+                    <ion-col><ion-button (click)="cambiarDescripcion('6to enfrentamiento')" expand="block" color="light" mode="ios">6to</ion-button></ion-col>
+                    <ion-col><ion-button (click)="cambiarDescripcion('7mo enfrentamiento')" expand="block" color="light" mode="ios">7mo</ion-button></ion-col>
+                    <ion-col><ion-button (click)="cambiarDescripcion('8vo enfrentamiento')" expand="block" color="light" mode="ios">8vo</ion-button></ion-col>
+                </ion-row>
                 <ion-item>
                     <ion-icon name="chatboxes" slot="start"></ion-icon>
                     <ion-textarea [(ngModel)]="newAccion.observacion" placeholder="Observación del juego o sanción" name="observaciones" required></ion-textarea>
                 </ion-item>
             </ion-col>
         </ion-row>
-        <ion-row *ngIf="actividad.participantes.length === 4">
-            <ion-col size="6" *ngFor=" let id of actividad.participantes">
-                <app-equipo (click)="selectEquipo(id)" [id]="id" [estilo]="'contenedor-activo'"></app-equipo>
-            </ion-col>
-        </ion-row>
-        <ion-row *ngIf="actividad.participantes.length !== 4">
+        <ion-row>
             <ion-col *ngFor=" let id of actividad.participantes">
                 <app-equipo (click)="selectEquipo(id)" [id]="id" [estilo]="'contenedor-activo'"></app-equipo>
             </ion-col>

@@ -32,10 +32,6 @@ export class ValidadorService {
       this.presentToast('Seleccione al menos 2 participantes');
       return false;
     }
-    if ( actividad.puntos < 10 ) {
-      this.presentToast('Ingrese puntos válidos');
-      return false;
-    }
     return true;
   }
 

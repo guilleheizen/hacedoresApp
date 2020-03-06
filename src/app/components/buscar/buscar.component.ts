@@ -26,7 +26,7 @@ export class BuscarComponent implements OnInit {
     nombre: '',
     observaciones: '',
     categoria: '',
-    puntos: 100,
+    puntos: 0,
     estado: 'CREADO',
     creador: '',
     posEquipo: [],
